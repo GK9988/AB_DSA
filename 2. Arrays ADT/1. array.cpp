@@ -230,6 +230,48 @@ public:
             swap(arr[i], arr[j]);
         }
     }
+
+    void sortedInsert(int x)
+    {
+        int i = length - 1;
+        while (arr[i] > x)
+        {
+            arr[i + 1] = arr[i];
+            i--;
+        }
+        arr[i + 1] = x;
+        length++;
+    }
+
+    int checkSort()
+    {
+        for (int i = 0; i < length - 2; i++)
+        {
+            if (arr[i] > arr[i + 1])
+                return 0;
+        }
+        return 1;
+    }
+
+    void negativeDisplacement()
+    {
+        int i = 0;
+        int j = length - 1;
+
+        while (i < j)
+        {
+            while (arr[i] < 0)
+            {
+                i++;
+            }
+            while (arr[j] >= 0)
+            {
+                j--;
+            }
+            if (i < j)
+                swap(arr[i], arr[j]);
+        }
+    }
 };
 
 int main()
@@ -240,5 +282,6 @@ int main()
     arr.display();
     cout << endl;
 
+    arr.negativeDisplacement();
     arr.display();
 }
