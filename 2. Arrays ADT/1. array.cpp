@@ -16,6 +16,12 @@ public:
     int size;
     int length;
 
+    void sizeInit(int sizeInput)
+    {
+        size = sizeInput;
+        arr = new int[size];
+    }
+
     void init()
     {
         cout << endl
@@ -272,16 +278,57 @@ public:
                 swap(arr[i], arr[j]);
         }
     }
+
+    void merge(Array arr1, Array arr2)
+    {
+        int i, j, k;
+        i = j = k = 0;
+        size = arr1.size + arr2.size;
+
+        while (i < arr1.length && j < arr2.length)
+        {
+            if (arr1.arr[i] < arr2.arr[j])
+            {
+                arr[k++] = arr1.arr[i++];
+            }
+            else
+            {
+                arr[k++] = arr2.arr[j++];
+            }
+        }
+
+        for (; i < arr1.length; i++)
+        {
+            arr[k++] = arr1.arr[i];
+        }
+        for (; j < arr2.length; j++)
+        {
+            arr[k++] = arr2.arr[j];
+        }
+        length = arr1.length + arr2.length;
+    }
 };
 
 int main()
 {
-    Array arr;
-    arr.init();
-    arr.dataInit();
-    arr.display();
-    cout << endl;
+    Array arr1, arr2, arr3;
+    arr1.init();
+    arr2.init();
 
-    arr.negativeDisplacement();
-    arr.display();
+    cout << "Enter data for array 1" << endl;
+    arr1.dataInit();
+
+    cout << "Enter data for array 2" << endl;
+    arr2.dataInit();
+
+    arr3.merge(arr1, arr2);
+
+    cout << "Array 1: ";
+    arr1.display();
+
+    cout << "Array 2: ";
+    arr2.display();
+
+    cout << "Merged Array: ";
+    arr3.display();
 }
