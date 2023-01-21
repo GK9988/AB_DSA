@@ -307,6 +307,43 @@ public:
         }
         length = arr1.length + arr2.length;
     }
+
+    void unsortedUnion(Array arr1, Array arr2)
+    {
+        length = 0;
+        size = arr1.size + arr2.size;
+
+        for (int i = 0; i < arr1.length; i++)
+        {
+            arr[i] = arr1.arr[i];
+            length++;
+        }
+
+        for (int i = 0; i < arr2.length; i++)
+        {
+            int flag = 0;
+            for (int j = 0; j < length; j++)
+            {
+                if (arr2.arr[i] == arr[j])
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                continue;
+            }
+            else
+            {
+                arr[length++] = arr2.arr[i];
+            }
+        }
+    }
+
+    void sortedUnion(Array arr1, Array arr2)
+    {
+    }
 };
 
 int main()
@@ -321,14 +358,13 @@ int main()
     cout << "Enter data for array 2" << endl;
     arr2.dataInit();
 
-    arr3.merge(arr1, arr2);
-
     cout << "Array 1: ";
     arr1.display();
 
     cout << "Array 2: ";
     arr2.display();
 
-    cout << "Merged Array: ";
+    cout << "Union Array: ";
+    arr3.unsortedUnion(arr1, arr2);
     arr3.display();
 }
